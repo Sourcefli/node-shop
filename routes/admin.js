@@ -4,15 +4,23 @@ const path = require('path');
 const router = express.Router();
 
 //Controller Imports
-const productsController = require('../controllers/products');
+const adminController = require('../controllers/admin');
 
-//===== /admin/... => GET
-router.get('/add-product', productsController.getAddProduct);
+// '/admin/{route}' => GET
+// STATIC
+router.get('/products', adminController.getAdminProducts);
+router.get('/add-product', adminController.getAddProduct);
 
-//==== /admin/... => POST
-router.post('/add-product', productsController.postAddProduct);
+// DYNAMIC
+router.get('/edit-product/:productId', adminController.getEditProduct);
+
+//==== '/admin/{route}' => POST
+router.post('/add-product', adminController.postAddProduct);
+router.post('/edit-product', adminController.postEditProduct);
+router.post('/delete-product', adminController.postDeleteProduct);
 
 module.exports = router;
 
 // Multiple Exports Syntax
 // exports.routes = router;
+// exports.helpers = helpers;
